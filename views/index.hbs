@@ -1,10 +1,17 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="chat__sidebar">
+    <h3>People</h3>
+    <div id="users"></div>
+</div>
 
-<ul id="messages"></ul>
+<div class="chat__main">
+    <ul id="messages" class="chat__messages"></ul>
 
-<form id="message-form">
-    <input type="text" name="message" placeholder="Enter your message...">
-    <button>Send</button>
-</form>
-<button id="send-location">Send Location</button>
+    <div class="chat__footer">
+        <form id="message-form">
+            <input type="text" name="message" placeholder="Enter your message..." autofocus autocomplete="off">
+            <button>Send</button>
+        </form>
+        <button id="send-location">Send location</button>
+    </div>
+</div>
+
