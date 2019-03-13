@@ -7,29 +7,31 @@ socket.on('connect', function() {
 socket.on('disconnect', function() { console.log('disconnected from server'); });
 
 socket.on('newMessage', function(message) {
-    let time = moment(message.createdAt).format('h:mm a');
-
-    let li = jQuery('<li></li>');
-    li.text(`${message.from} ${time}: ${message.text}`);
-
-    jQuery('#messages').append(li);
+    let source = $('#message-template').html();
+    let template = Handlebars.compile(source);
+    let html = template({
+        text: message.text,
+        from: message.from,
+        createdAt: moment(message.createdAt).format('H:mm a')
+    });
+    $('#messages').append(html);
 });
 
 socket.on('newLocationMessage', function(message) {
-    let li = jQuery('<li></li>');
-    let a = jQuery('<a target="_blank">My current location</a>');
-    let time = moment(message.createdAt).format('h:mm a');
-    a.attr('href', message.url);
-
-    li.text(`${message.from} ${time}: `);
-    li.append(a);
-    jQuery('#messages').append(li);
+    let source = $('#location-message-template').html();
+    let template = Handlebars.compile(source);
+    let html = template({
+        url: message.url,
+        from: message.from,
+        createdAt: moment(message.createdAt).format('H:mm a')
+    });
+    $('#messages').append(html);
 });
 
-jQuery('#message-form').on('submit', function (e) {
+$('#message-form').on('submit', function (e) {
     e.preventDefault();
 
-    let messageTextbox = jQuery('[name=message]');
+    let messageTextbox = $('[name=message]');
 
     socket.emit('createMessage', {
         from: 'User',
@@ -39,7 +41,7 @@ jQuery('#message-form').on('submit', function (e) {
     });
 });
 
-let locationButton = jQuery('#send-location');
+let locationButton = $('#send-location');
 
 locationButton.on('click', function () {
     if (!navigator.geolocation)

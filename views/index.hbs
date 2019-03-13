@@ -4,7 +4,7 @@
 </div>
 
 <div class="chat__main">
-    <ul id="messages" class="chat__messages"></ul>
+    <ol id="messages" class="chat__messages"></ol>
 
     <div class="chat__footer">
         <form id="message-form">
@@ -14,4 +14,28 @@
         <button id="send-location">Send location</button>
     </div>
 </div>
+
+<script id="message-template" type="text/x-handlebars-template">
+    <li class="message">
+        <div class="message__title">
+            <h4>\{{from}}</h4>
+            <span>\{{createdAt}}</span>
+        </div>
+        <div class="message__body">
+            <p>\{{text}}</p>
+        </div>
+    </li>
+</script>
+
+<script id="location-message-template" type="text/x-handlebars-template">
+    <li class="message">
+        <div class="message__title">
+            <h4>\{{from}}</h4>
+            <span>\{{createdAt}}</span>
+        </div>
+        <div class="message__body">
+            <p><a href="\{{url}}" target="_blank">My current location</a></p>
+        </div>
+    </li>
+</script>
 
