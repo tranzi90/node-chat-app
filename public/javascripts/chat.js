@@ -15,9 +15,25 @@ function scrollToBottom() {
 
 socket.on('connect', function() {
     console.log('connected to server');
+    let params = new URLSearchParams(window.location.search);
+
+    socket.emit('join', {
+        name: params.get('name'),
+        room: params.get('room')
+    });
 });
 
 socket.on('disconnect', function() { console.log('disconnected from server'); });
+
+socket.on('updateUserList', function(users) {
+    let ul = $('<ul></ul>');
+
+    users.forEach(function (user) {
+        ul.append($('<li></li>').text(user));
+    });
+
+    $('#users').html(ul);
+});
 
 socket.on('newMessage', function(message) {
     let source = $('#message-template').html();
