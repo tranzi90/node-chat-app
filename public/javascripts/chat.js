@@ -19,11 +19,14 @@ socket.on('connect', function() {
 
     socket.emit('join', {
         name: params.get('name'),
+        newRoom: params.get('newRoom'),
         room: params.get('room')
     });
 });
 
-socket.on('disconnect', function() { console.log('disconnected from server'); });
+// socket.on('disconnect', );
+
+window.onbeforeunload = function() { socket.emit('leaveChat'); };
 
 socket.on('updateUserList', function(users) {
     let ul = $('<ul></ul>');

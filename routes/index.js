@@ -4,14 +4,21 @@ const {isRealString} = require('./../bin/utils/validation');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Join | Chat app', bodyClass: 'class="centered-form"' });
+  res.render('index', {
+    title: 'Join | Chat app',
+    bodyClass: 'class="centered-form"'
+  });
 });
 
 router.get('/chat', function(req, res, next) {
-  if (!isRealString(req.query.name) || !isRealString(req.query.room)) {
+  if (!isRealString(req.query.name) || (!isRealString(req.query.room) && !isRealString(req.query.newRoom))) {
     res.render('error', {message: 'Пашол ты !!!!!'});
   } else {
-    res.render('chat', { title: 'Chat | Chat app', bodyClass: 'class="chat"' });
+    res.render('chat', {
+      title: 'Chat | Chat app',
+      room: req.query.room || req.query.newRoom,
+      bodyClass: 'class="chat"'
+    });
   }
 });
 
