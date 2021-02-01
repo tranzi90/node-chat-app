@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/chat', function(req, res, next) {
   if (!isRealString(req.query.name) || (!isRealString(req.query.room) && !isRealString(req.query.newRoom))) {
-    res.render('error', {message: 'Пашол ты !!!!!'});
+    res.render('error', {message: 'Something went wrong...'});
   } else {
     res.render('chat', {
       title: 'Chat | Chat app',
