@@ -1,32 +1,32 @@
 class Users {
-    constructor () {
-        this.users = [];
-    };
+    constructor() {
+        this.users = []
+    }
 
-    addUser (id, name, room) {
-        let user = {id, name, room};
-        this.users.push(user);
-        return user;
-    };
+    addUser(id, name, room) {
+        let user = { id, name, room }
+        this.users.push(user)
+        return user
+    }
 
-    removeUser (id) {
-        let user = this.getUser(id);
-        this.users = this.users.filter((user) => user.id !== id);
+    removeUser(id) {
+        let user = this.getUser(id)
+        this.users = this.users.filter((user) => user.id !== id)
 
-        return user;
-    };
+        return user
+    }
 
-    getUser (id) {
-        let user = this.users.filter((user) => user.id === id);
+    getUser(id) {
+        let user = this.users.filter((user) => user.id === id)
 
-        return user[0];
-    };
+        return user[0]
+    }
 
-    getUserList (room) {
-        let users = this.users.filter((user) => user.room === room);
+    getUserList(room) {
+        let users = this.users.filter((user) => user.room === room)
 
-        return users.map((user) => user.name);
-    };
+        return users.map((user) => user.name)
+    }
 }
 
-module.exports = {Users};
+module.exports = { Users }
